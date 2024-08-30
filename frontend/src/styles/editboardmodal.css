@@ -1,0 +1,88 @@
+/* editboardmodal.css */
+
+.editboard-modal-container {
+    /* This class is for the outermost container */
+    width: 100%;
+    max-width: 500px; /* Adjust as needed */
+    margin: 0 auto;
+  }
+  
+  .editboard-modal {
+    /* Styles for the modal content */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .editboard-modal h2 {
+    /* Styles for the modal header */
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .editboard-modal .input-container {
+    /* Styles for the input container */
+    margin-bottom: 20px;
+  }
+  
+  .editboard-modal input {
+    /* Styles for the input field */
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .editboard-modal .button-container {
+    /* Styles for the button container */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .editboard-modal button {
+    /* Base styles for buttons */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .editboard-modal button:hover {
+    opacity: 0.9;
+  }
+  
+  /* Specific button styles */
+  .editboard-modal .cancel-button {
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+  }
+  
+  .editboard-modal .update-button {
+    background-color: #17A2B8;
+    color: white;
+  }
+  
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .editboard-modal-container {
+      width: 90%;
+    }
+    
+    .editboard-modal .button-container {
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .editboard-modal button {
+      width: 100%;
+    }
+  }

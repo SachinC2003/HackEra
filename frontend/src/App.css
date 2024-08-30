@@ -1,0 +1,82 @@
+body{
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+}
+/* General styling classes*/
+.flex{
+    display: flex;
+}
+.justify-center{
+    justify-content: center;
+}
+.align-center{
+    align-items: center;
+}
+.flex-col{
+    flex-direction: column;
+}
+.underline{
+    text-decoration: underline;
+}
+.justify-between{
+    justify-content: space-between;
+}
+.w-full{
+    width: 100%;
+}
+.mr-2{
+    margin-right: 2px;
+}
+.mr-4{
+    margin-right: 4px;
+}
+.mr-8{
+    margin-right: 8px;
+}
+.ml-16{
+    margin-left: 16px;
+}
+.ml-10{
+    margin-left: 10px;
+}
+.gap-4{
+    gap: 4px;
+}
+.gap-8{
+    gap: 8px;
+}
+.gap-12{
+    gap: 12px;
+}
+.gap-16{
+    gap: 1rem;
+}
+
+/* Define global scrollbar styles */
+*::-webkit-scrollbar {
+    width: 10px; /* Width of the scrollbar */
+    height: 12px; /* Height of the scrollbar */
+}
+
+/* Style the scrollbar track */
+*::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color of the track */
+    border-radius: 1rem; /* Rounded corners for the track */
+}
+
+/* Style the scrollbar thumb */
+*::-webkit-scrollbar-thumb {
+    background: #8DAAB9CC; /* Color of the thumb */
+    border-radius: 1rem; /* Rounded corners for the thumb */
+}
+
+/* Style the scrollbar thumb on hover */
+*::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color of the thumb on hover */
+}
+
+/* Style the scrollbar corner (for both vertical and horizontal scrollbars) */
+*::-webkit-scrollbar-corner {
+    background: #f1f1f1; /* Color of the scrollbar corner */
+}

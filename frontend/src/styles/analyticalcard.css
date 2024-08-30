@@ -1,0 +1,31 @@
+.analyticalcard-container{
+    font-family: 'Open Sans';
+    background-color: #F9FCFF;
+    padding: 1rem 1rem;
+    width: 100%;
+}
+@media (min-width: 600px) {
+    .analyticalcard-container{
+        width: 50%;
+    }
+}
+  
+@media (min-width: 900px) {
+    .analyticalcard-container{
+        width: 35%;
+    }
+}
+ul{
+    padding: 0 1rem;
+    margin: 0;
+}
+li{
+    padding: 0.5rem;
+}
+ul li::marker {
+    color: #90C4CC;
+    font-size: 1.2rem;
+}
+.property-value{
+    font-weight: 600;
+}

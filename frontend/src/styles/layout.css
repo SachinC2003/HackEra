@@ -1,0 +1,13 @@
+.layout-container {
+    font-family: 'Poppins';
+    display: flex;
+    height: 100vh; /* Ensure it takes the full viewport height */
+}
+
+.right-container {
+    flex-grow: 1;
+    overflow-x: hidden; /* or 'visible' to ensure it doesn't restrict horizontal overflow */
+    max-height: 100vh; /* Maintain full height to prevent vertical overflow */
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,95 @@
+/* TaskCard.css */
+
+.task-card {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  max-width: 425px;
+  white-space: wrap;
+}
+
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #888;
+}
+
+.task-priority {
+  color: #707070;
+  font-weight: 500;
+  font-size: smaller;
+}
+
+.task-settings {
+  color: black;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.down-arrow-filled {
+  padding: 4px 6px;
+  background-color: #EEECEC;
+  cursor: pointer;
+}
+
+.task-title {
+  margin: 8px 0;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.checklist {
+  margin: 16px 0;
+}
+
+.subtask {
+  display: flex;
+  align-items: center;
+  border: 1px solid #E2E2E2;
+  padding: 6px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+
+.subtask input {
+  margin-right: 8px;
+}
+
+.subtask span.done {
+  color: #888;
+  text-decoration: line-through;
+}
+
+.task-footer {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr 1fr 1fr 1fr;
+  gap: 5px;
+  padding: 5px; 
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 8px;
+  margin-top: 1rem;
+}
+.task-footer .button-container{
+  padding: 0.5rem 0.2rem;
+  border-radius: 8px;
+}
+
+.profile-view {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #FFEBEB;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: xx-small;
+  text-transform: uppercase;
+}
+

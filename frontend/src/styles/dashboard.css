@@ -1,0 +1,74 @@
+
+.filter {
+    margin-right: 1rem;
+}
+
+.dashboard-container {
+    display: flex; 
+    width: 100%; 
+    overflow-x: auto; 
+    white-space: nowrap; 
+    padding: 1rem 0rem;
+    box-sizing: border-box; 
+}
+
+.delete-button{
+    cursor: pointer;
+    padding: 0.5rem 0.5rem;
+    border: none;
+    background: none;
+    color: red;
+    font-size: 1rem;
+}
+
+.edit-button{
+    cursor: pointer;
+    padding: 0.5rem 0.5rem;
+    border: none;
+    background: none;
+    color: blue;
+    font-size: 1rem;
+}
+
+.add-people-button{
+    font-size: small;
+    color: #707070;
+    cursor: pointer;
+}
+
+/* Dropdown container */
+.board-dropdown {
+    appearance: none; /* Removes default select arrow */
+    padding: 8px 12px;
+    font-size: 16px;
+    color: #333;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 180px; /* Ensures enough width for content */
+  }
+  
+  /* Adding custom arrow */
+  .board-dropdown {
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"%3E%3Cpath fill="%23666" d="M2 0L0 2h4z" /%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 8px 10px;
+  }
+  
+  /* Hover and focus states */
+  .board-dropdown:hover,
+  .board-dropdown:focus {
+    border-color: #007bff;
+    background-color: #f1f1f1;
+    outline: none;
+  }
+  
+  /* Option styling */
+  .board-dropdown option {
+    padding: 0px;
+    font-size: 16px;
+  }
+  

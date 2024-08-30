@@ -1,0 +1,13 @@
+.topbar-container{
+    max-width: 100%;
+    padding:0.8rem 1rem;
+}
+.title{
+    font-size: 1rem;
+    font-weight: 600;
+}
+.date{
+    font-weight: 500;
+    margin: 8px 0;
+    color: #707070;
+}

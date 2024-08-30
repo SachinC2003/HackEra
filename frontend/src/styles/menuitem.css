@@ -1,0 +1,19 @@
+.title{
+    font-weight: 500;
+    margin: 0.5rem 0rem 0.5rem 0;
+}
+.icon-container{
+    margin: 0.5rem 1rem 0.5rem 0;
+    height: 24px;
+}
+.selected{
+    background-color: #4391ED1A;
+}
+.menuitem-container{
+    cursor: pointer;
+    margin-bottom: 1rem;
+    padding-left: 3rem;
+}
+.red{
+    color: #CF3636;
+}

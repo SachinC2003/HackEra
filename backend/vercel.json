@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "dist/index.js", "use": "@vercel/node" }
+  ],
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/dist/index.js" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "https://pro-manage-client-7nrjx5dml-ayushs-projects-935f2cc5.vercel.app" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET,HEAD,PUT,PATCH,POST,DELETE" },
+        { "key": "Access-Control-Allow-Headers", "value": "X-Requested-With,Content-Type,Accept" }
+      ]
+    }  
+  ]
+}

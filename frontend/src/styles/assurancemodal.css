@@ -1,0 +1,10 @@
+.assurance-modal-container .modal-header h2{
+    margin: 0 ;
+    font-size: 1rem;
+    font-weight: 600;
+}
+.assurance-modal .button-container{
+    min-width: 300px;
+    border-radius: 8px;
+    padding: 0.5rem;
+}

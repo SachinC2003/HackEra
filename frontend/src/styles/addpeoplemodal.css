@@ -1,0 +1,41 @@
+.addpeople-modal{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 500px;
+    font-size: medium;
+    font-family: 'Noto Sans';
+}
+.addpeople-modal .button-container{
+    width: 100%;
+    border-radius: 8px;
+    font-weight: 500;
+    font-size: small;
+    padding: 0.5rem;
+}
+.addpeople-modal-container .modal-header{
+    justify-content: start;
+    padding-bottom: 0;
+}
+.addpeople-modal-container .modal-header h2{
+    margin: 0;
+}
+
+.addpeople-modal input{
+    border: none;
+    font-family: 'Open Sans';
+    max-width: 100%;
+    font-size: 1rem;
+    
+}
+.addpeople-modal input::placeholder{
+    color: #00000080;
+}
+.addpeople-modal input:focus{
+    outline: none;
+    border: none;
+    font-size: 1rem;
+}
+.addpeople-modal .input-container{
+    border-color: #767575;
+}

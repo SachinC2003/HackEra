@@ -1,0 +1,117 @@
+label{
+    font-weight: 500;
+    font-size: small;
+}
+.task-edit-modal-container .modal{
+    margin: 1rem;
+    font-size: small;
+    font-family: 'Inter';
+    width: 550px;
+}
+
+.modal input{
+    font-size: small;
+}
+
+.modal input:focus{
+    font-size: small;
+}
+
+.priority-container{
+    padding: 5px;
+    border: 1px solid #E2E2E2;
+    border-radius: 8px;
+    margin-right: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    color: #767575;
+    cursor: pointer;
+}
+
+.selected.priority-container{
+    background-color: #EEECEC;
+}
+
+.task-edit-modal-container .modal-content{
+    width: -webkit-fill-available;
+}
+
+.checklist-input{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+input[type="checkbox"]{
+    width: fit-content;
+}
+.add-new-button{
+    color: #767575;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.subtask-item {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adjust the gap as needed */
+    border: 1px solid #E2E2E2;
+    border-radius: 8px;
+    padding:0.5rem;
+}
+
+.subtask-item input[type="text"] {
+    flex-grow: 1;
+}
+
+.subtask-item button {
+    background: transparent;
+    border: none;
+    color: red;
+    cursor: pointer;
+}
+
+.subtask-item .done {
+    text-decoration: line-through;
+    color: grey;
+}
+.task-modal-footer{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.task-modal-footer .button-container{
+    border-radius: 8px;
+    width: 120px;
+    padding: 8px;
+}
+
+.datepicker-overlay{
+    left: 0;
+    top: 0;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index:1250 ;
+}
+
+.datepicker-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1500;
+}
+
+.custom-date-picker {
+    background-color: white;
+    border: 1px solid #E2E2E2;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #707070;
+    padding: 8px;
+}
+
+

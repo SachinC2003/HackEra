@@ -1,0 +1,17 @@
+.tasklistheader{
+    font-weight: 500;
+    margin: 0;
+}
+.tasklist-container{
+    border-radius: 1rem;
+    height: 72vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: #EEF2F5;
+    min-width: 300px;
+    margin: 0 0.5rem;
+}
+.tasklistheader-container{
+    padding: 1rem;
+    padding-bottom: 0;
+}

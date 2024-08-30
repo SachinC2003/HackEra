@@ -1,0 +1,59 @@
+input{
+    border: none;
+    font-family: 'Open Sans';
+    max-width: 100%;
+    font-size: 1rem;
+    width: 100%;
+}
+input::placeholder{
+    color: #828282;
+}
+input:focus{
+    outline: none;
+    border: none;
+    font-size: 1rem;
+}
+
+.input-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 0.5rem;
+    position: relative;
+    border: 1px solid #D0D0D0;
+    font-family: 'Open Sans';
+    overflow-x: hidden;
+    width: -webkit-fill-available;
+}
+.input-left-container{
+    display: flex;
+    gap: 8px;
+    width: -webkit-fill-available;
+}
+.error-message {
+    color: #DB371F;
+    font-size: 0.775em;
+    margin-top: 0.5em;
+}
+
+
+/* Override autofill background and text color for WebKit browsers (Chrome, Safari, etc.) */
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset !important;
+    box-shadow: 0 0 0 1000px white inset !important;
+    -webkit-text-fill-color: #000 !important;
+}
+
+/* Override autofill background and text color for Firefox */
+input:-moz-autofill {
+    box-shadow: 0 0 0 1000px white inset !important;
+    -moz-box-shadow: 0 0 0 1000px white inset !important;
+    color: #000 !important;
+}
+
+/* Override autofill background and text color for Edge */
+input:-ms-autofill {
+    box-shadow: 0 0 0 1000px white inset !important;
+    -ms-box-shadow: 0 0 0 1000px white inset !important;
+    color: #000 !important;
+}

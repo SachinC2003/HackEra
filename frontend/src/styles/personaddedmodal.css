@@ -1,0 +1,22 @@
+.personoadded-modal-container .modal{
+    width: 500px;
+    padding: 2rem;
+}
+.personoadded-modal-container .modal-content{
+    width: auto;
+}
+.person-added-modal-header{
+    width: 100%;
+    text-align: center;
+}
+.personadded-modal{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.personadded-modal .button-container{
+    padding: 0.5rem;
+    width: 200px;
+    border-radius: 8px;
+}

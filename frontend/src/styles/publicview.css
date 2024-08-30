@@ -1,0 +1,136 @@
+.public-view .topbar{
+    display: flex;
+    padding: 2rem ;
+    justify-content: space-between;
+}
+.public-view .taskcardholder{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* TaskCard.css */
+
+.public-view .task-card {
+  font-family: 'Poppins';
+  border: 1px solid #EDF5FE;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px;
+  width: 600px;
+  white-space: wrap;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+  
+.public-view .task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #888;
+}
+
+.public-view .task-priority {
+  color: #707070;
+  font-weight: 500;
+  font-size: smaller;
+}
+
+.public-view .task-settings {
+  color: black;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.public-view .task-title {
+  margin: 1rem 0 2rem 0;
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+
+.public-view .checklist {
+  margin: 16px 0;
+  overflow-y: auto;
+  max-height: 40vh;
+}
+
+.public-view .checklist-header{
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'Inter';
+}
+
+.public-view .subtask {
+  display: flex;
+  align-items: center;
+  white-space: wrap;
+  border: 1px solid #E2E2E2;
+  padding: 6px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  overflow-wrap: anywhere;
+}
+
+.public-view .subtask input {
+  margin-right: 8px;
+}
+
+.public-view .subtask span.done {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.public-view .task-footer {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1fr 1fr 1fr;
+  gap: 5px;
+  padding: 5px; 
+  padding-left: 0;
+  padding-right: 0;
+  font-size: 8px;
+  margin-top: 0;
+}
+
+.public-view .task-footer .button-container{
+  padding: 0.5rem 0.2rem;
+  border-radius: 8px;
+}
+
+.public-view .profile-view {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #FFEBEB;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: xx-small;
+  text-transform: uppercase;
+}
+
+.public-view h4{
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+}  
+
+@media (max-width: 500px){
+  .public-view .task-footer{
+    align-items: baseline;
+  }
+  .public-view h4{
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin: 0;
+  }  
+  .public-view .task-card {
+    box-sizing: border-box;
+    max-width:100vw;
+  }
+}

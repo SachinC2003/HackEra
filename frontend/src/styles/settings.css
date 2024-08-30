@@ -1,0 +1,25 @@
+.settings-container{
+    font-family: 'Open Sans';
+    display: flex;
+    max-width: 500px;
+    flex-direction: column;
+    gap: 1rem;
+    padding-left: 2rem;
+}
+.settings-container h2{
+    font-weight: 500;
+}
+.settings-container button {
+    width: 105%;
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 0.8rem;
+    color: #fff;
+    background-color: #17A2B8;
+    border: none;
+    border-radius: 4rem;
+    cursor: pointer;
+}
+form{
+    margin-top: 3rem;
+}
