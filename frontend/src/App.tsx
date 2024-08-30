@@ -11,6 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Loader from './components/general/Loader';
 import ProtectedRoute from './components/general/ProtectedRoute';
 import TaskPublicView from './components/pages/TaskPublicView';
+import Chat from './components/pages/Chat'; // New import
 
 function App() {
   return (
@@ -50,6 +51,21 @@ function App() {
             </ProtectedRoute>
           } />
           <Route path="/tasks/:taskId" element={<TaskPublicView />} />
+          {/* New chat route */}
+          <Route path="/chat" element={
+            <ProtectedRoute>
+              <Layout>
+               <Chat />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/chat/:boardId" element={
+            <ProtectedRoute>
+              <Layout>
+                <Chat />
+              </Layout>
+            </ProtectedRoute>
+          } />
         </Routes>
       </BrowserRouter>
     </>

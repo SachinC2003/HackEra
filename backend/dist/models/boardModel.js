@@ -18,6 +18,10 @@ const boardSchema = new mongoose_1.default.Schema({
     boardMembers: {
         type: [String],
         default: []
+    },
+    chatChannelId: {
+        type: String,
+        default: null
     }
 }, {
     timestamps: true
@@ -37,7 +41,8 @@ const boardValidation = (data) => {
         }),
         boardMembers: joi_1.default.array().items(joi_1.default.string()).messages({
             'array.base': 'Board members should be an array of strings'
-        })
+        }),
+        chatChannelId: joi_1.default.string().allow(null)
     });
     return schema.validate(data);
 };

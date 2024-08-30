@@ -46,6 +46,7 @@ const Dashboard: React.FC = () => {
     fetchBoards();
     fetchTasks();
   }, [boardId, filterOption]);
+  console.log('Dashboard component rendered');
 
   const fetchBoards = async () => {
     try {
@@ -252,7 +253,9 @@ const Dashboard: React.FC = () => {
           <select
             value={boardId || ''}
             onChange={(e) => {
+              console.log(e.target.value); // Add this line
               if (e.target.value === 'create-new') {
+                console.log('hi')
                 setIsAddBoardModalOpen(true);
               } else {
                 navigate(`/dashboard/${e.target.value}`);
@@ -266,9 +269,9 @@ const Dashboard: React.FC = () => {
                 {board.name}
               </option>
             ))}
+            <option value="test1">Default</option>
             <option value="create-new">+ Add Board</option>
           </select>
-
             {
               <AddBoardModal 
                 isOpen={isAddBoardModalOpen} 

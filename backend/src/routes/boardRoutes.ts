@@ -2,8 +2,10 @@ import express, { Request, Response } from 'express';
 import joi from 'joi';
 import { authenticatejwt } from './middlewares/authMiddleware';
 import { boardModel, boardValidation } from '../models/boardModel';
-
+import { streamClient } from '..';
 const router = express.Router();
+// Initialize Stream Chat client
+
 
 // Validation schema for email
 const emailValidation = (data: { email: string }) => {
@@ -72,10 +74,19 @@ router.post('/create-board', authenticatejwt, async (req: Request, res: Response
         const { error } = boardValidation({ userid: userId, name });
         if (error) return res.status(400).send({ success: false, message: error.details[0].message });
 
+        // Create a new Stream Chat channel
+        const channel = streamClient.channel('messaging', `board-${Date.now()}`, {
+            name: name,
+            created_by_id: userId,
+        });
+
+        await channel.create();
+
         const newBoard = new boardModel({
             userid: userId,
             name,
-            boardMembers: []
+            boardMembers: [],
+            chatChannelId: channel.id
         });
 
         await newBoard.save();
@@ -120,6 +131,12 @@ router.put('/edit-board/:boardId', authenticatejwt, async (req: Request, res: Re
             return res.status(404).send({ success: false, message: "Board not found or you don't have permission to edit it" });
         }
 
+        // Update the Stream Chat channel name
+        if (updatedBoard.chatChannelId) {
+            const channel = streamClient.channel('messaging', updatedBoard.chatChannelId);
+            await channel.update({ name: name }, { text: `Board name updated to "${name}"` });
+        }
+
         return res.status(200).send({ success: true, data: updatedBoard });
     } catch (error) {
         console.error(error);
@@ -139,7 +156,49 @@ router.delete('/delete-board/:boardId', authenticatejwt, async (req: Request, re
             return res.status(404).send({ success: false, message: "Board not found or you don't have permission to delete it" });
         }
 
-        return res.status(200).send({ success: true, message: "Board deleted successfully" });
+        // Delete the associated Stream Chat channel
+        if (deletedBoard.chatChannelId) {
+            const channel = streamClient.channel('messaging', deletedBoard.chatChannelId);
+            await channel.delete();
+        }
+
+        return res.status(200).send({ success: true, message: "Board and associated chat channel deleted successfully" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({ success: false, message: "Internal server error", error });
+    }
+});
+
+// New route to add a member to a board and chat channel
+router.post('/add-board-member/:boardId', authenticatejwt, async (req: Request, res: Response) => {
+    try {
+        const { boardId } = req.params;
+        const { email } = req.body;
+        const userId = req.headers.id as string;
+
+        const { error } = emailValidation({ email });
+        if (error) return res.status(400).send({ success: false, message: error.details[0].message });
+
+        const board = await boardModel.findOne({ _id: boardId, userid: userId });
+
+        if (!board) {
+            return res.status(404).send({ success: false, message: "Board not found or you don't have permission to edit it" });
+        }
+
+        if (board.boardMembers.includes(email)) {
+            return res.status(400).send({ success: false, message: "Email already added to board members" });
+        }
+
+        board.boardMembers.push(email);
+        await board.save();
+
+        // Add the member to the Stream Chat channel
+        if (board.chatChannelId) {
+            const channel = streamClient.channel('messaging', board.chatChannelId);
+            await channel.addMembers([email]);
+        }
+
+        return res.status(200).send({ success: true, data: board });
     } catch (error) {
         console.error(error);
         return res.status(500).send({ success: false, message: "Internal server error", error });

@@ -17,8 +17,10 @@ const express_1 = __importDefault(require("express"));
 const joi_1 = __importDefault(require("joi"));
 const authMiddleware_1 = require("./middlewares/authMiddleware");
 const boardModel_1 = require("../models/boardModel");
+const __1 = require("..");
 const router = express_1.default.Router();
 exports.router = router;
+// Initialize Stream Chat client
 // Validation schema for email
 const emailValidation = (data) => {
     const schema = joi_1.default.object({
@@ -80,10 +82,17 @@ router.post('/create-board', authMiddleware_1.authenticatejwt, (req, res) => __a
         const { error } = (0, boardModel_1.boardValidation)({ userid: userId, name });
         if (error)
             return res.status(400).send({ success: false, message: error.details[0].message });
+        // Create a new Stream Chat channel
+        const channel = __1.streamClient.channel('messaging', `board-${Date.now()}`, {
+            name: name,
+            created_by_id: userId,
+        });
+        yield channel.create();
         const newBoard = new boardModel_1.boardModel({
             userid: userId,
             name,
-            boardMembers: []
+            boardMembers: [],
+            chatChannelId: channel.id
         });
         yield newBoard.save();
         return res.status(201).send({ success: true, data: newBoard });
@@ -118,6 +127,11 @@ router.put('/edit-board/:boardId', authMiddleware_1.authenticatejwt, (req, res) 
         if (!updatedBoard) {
             return res.status(404).send({ success: false, message: "Board not found or you don't have permission to edit it" });
         }
+        // Update the Stream Chat channel name
+        if (updatedBoard.chatChannelId) {
+            const channel = __1.streamClient.channel('messaging', updatedBoard.chatChannelId);
+            yield channel.update({ name: name }, { text: `Board name updated to "${name}"` });
+        }
         return res.status(200).send({ success: true, data: updatedBoard });
     }
     catch (error) {
@@ -134,7 +148,42 @@ router.delete('/delete-board/:boardId', authMiddleware_1.authenticatejwt, (req, 
         if (!deletedBoard) {
             return res.status(404).send({ success: false, message: "Board not found or you don't have permission to delete it" });
         }
-        return res.status(200).send({ success: true, message: "Board deleted successfully" });
+        // Delete the associated Stream Chat channel
+        if (deletedBoard.chatChannelId) {
+            const channel = __1.streamClient.channel('messaging', deletedBoard.chatChannelId);
+            yield channel.delete();
+        }
+        return res.status(200).send({ success: true, message: "Board and associated chat channel deleted successfully" });
+    }
+    catch (error) {
+        console.error(error);
+        return res.status(500).send({ success: false, message: "Internal server error", error });
+    }
+}));
+// New route to add a member to a board and chat channel
+router.post('/add-board-member/:boardId', authMiddleware_1.authenticatejwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { boardId } = req.params;
+        const { email } = req.body;
+        const userId = req.headers.id;
+        const { error } = emailValidation({ email });
+        if (error)
+            return res.status(400).send({ success: false, message: error.details[0].message });
+        const board = yield boardModel_1.boardModel.findOne({ _id: boardId, userid: userId });
+        if (!board) {
+            return res.status(404).send({ success: false, message: "Board not found or you don't have permission to edit it" });
+        }
+        if (board.boardMembers.includes(email)) {
+            return res.status(400).send({ success: false, message: "Email already added to board members" });
+        }
+        board.boardMembers.push(email);
+        yield board.save();
+        // Add the member to the Stream Chat channel
+        if (board.chatChannelId) {
+            const channel = __1.streamClient.channel('messaging', board.chatChannelId);
+            yield channel.addMembers([email]);
+        }
+        return res.status(200).send({ success: true, data: board });
     }
     catch (error) {
         console.error(error);

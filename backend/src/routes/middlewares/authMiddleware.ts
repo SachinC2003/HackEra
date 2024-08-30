@@ -5,10 +5,12 @@ interface JwtPayload {
 }
 export const authenticatejwt=(req:Request,res:Response,next:NextFunction)=>{
     try{
+        console.log("hiii")
         const token = req.headers.authorization?.split(' ')[1];
         if(!token) return res.status(401).send({success:false,error:new Error("No token exists"),message:"No token exists"})
         const {id}=jwt.verify(token,process.env.JWTPRIVATEKEY as string) as JwtPayload
         req.headers.id=id;
+        
         next()
     }catch(err)
     {
