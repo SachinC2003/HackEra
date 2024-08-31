@@ -239,8 +239,9 @@ router.get('/tasks', authenticatejwt, async (req: Request, res: Response) => {
             default:
                 break;
         }
-  
+        console.log("user mail",user.email)
         // Retrieve tasks for the user based on userid or assignedTo email and boardId
+        console.log(boardId)
         const tasks = await taskModel.find({
             $or: [
                 { userid: userId },
@@ -249,7 +250,7 @@ router.get('/tasks', authenticatejwt, async (req: Request, res: Response) => {
             boardId:boardId || '',  // Add boardId to the query if provided
             ...dateRange
         });
-  
+        console.log("tasks",tasks)
         // Categorize tasks based on type
         const categorizedTasks: {
             todo: TaskDocument[],

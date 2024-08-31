@@ -12,6 +12,7 @@ import Loader from './components/general/Loader';
 import ProtectedRoute from './components/general/ProtectedRoute';
 import TaskPublicView from './components/pages/TaskPublicView';
 import Chat from './components/pages/Chat'; // New import
+import VideoCall from './components/pages/Videocall';
 
 function App() {
   return (
@@ -63,6 +64,20 @@ function App() {
             <ProtectedRoute>
               <Layout>
                 <Chat />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/videocall" element={
+            <ProtectedRoute>
+              <Layout>
+                <VideoCall />
+              </Layout>
+            </ProtectedRoute>
+          } />
+          <Route path="/videocall/:callId" element={
+            <ProtectedRoute>
+              <Layout>
+                <VideoCall />
               </Layout>
             </ProtectedRoute>
           } />

@@ -226,11 +226,14 @@ router.get('/tasks', authMiddleware_1.authenticatejwt, (req, res) => __awaiter(v
             default:
                 break;
         }
+        console.log("user mail", user.email);
         // Retrieve tasks for the user based on userid or assignedTo email and boardId
+        console.log(boardId);
         const tasks = yield taskModel_1.taskModel.find(Object.assign({ $or: [
                 { userid: userId },
                 { assignedTo: user.email }
             ], boardId: boardId || '' }, dateRange));
+        console.log("tasks", tasks);
         // Categorize tasks based on type
         const categorizedTasks = {
             todo: [],

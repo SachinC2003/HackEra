@@ -18,6 +18,7 @@ const joi_1 = __importDefault(require("joi"));
 const authMiddleware_1 = require("./middlewares/authMiddleware");
 const boardModel_1 = require("../models/boardModel");
 const __1 = require("..");
+const userModel_1 = require("../models/userModel");
 const router = express_1.default.Router();
 exports.router = router;
 // Initialize Stream Chat client
@@ -106,7 +107,24 @@ router.post('/create-board', authMiddleware_1.authenticatejwt, (req, res) => __a
 router.get('/boards', authMiddleware_1.authenticatejwt, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const userId = req.headers.id;
-        const boards = yield boardModel_1.boardModel.find({ userid: userId });
+        if (!userId) {
+            return res.status(400).send({ success: false, message: "User ID is required" });
+        }
+        // Find boards by userId
+        let boards = yield boardModel_1.boardModel.find({ userid: userId });
+        // If no boards are found, check the user table
+        if (boards.length === 0) {
+            const user = yield userModel_1.userModel.findOne({ _id: userId }).select('email');
+            if (user) {
+                const email = user.email;
+                // Find boards where email is in boardMembers array
+                boards = yield boardModel_1.boardModel.find({ boardMembers: email });
+            }
+        }
+        // Check if any boards were found
+        if (boards.length === 0) {
+            return res.status(404).send({ success: false, message: "No boards found for this user" });
+        }
         return res.status(200).send({ success: true, data: boards });
     }
     catch (error) {

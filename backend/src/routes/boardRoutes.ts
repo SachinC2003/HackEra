@@ -3,6 +3,7 @@ import joi from 'joi';
 import { authenticatejwt } from './middlewares/authMiddleware';
 import { boardModel, boardValidation } from '../models/boardModel';
 import { streamClient } from '..';
+import { userModel } from '../models/userModel';
 const router = express.Router();
 // Initialize Stream Chat client
 
@@ -102,7 +103,28 @@ router.post('/create-board', authenticatejwt, async (req: Request, res: Response
 router.get('/boards', authenticatejwt, async (req: Request, res: Response) => {
     try {
         const userId = req.headers.id as string;
-        const boards = await boardModel.find({ userid: userId });
+
+        if (!userId) {
+            return res.status(400).send({ success: false, message: "User ID is required" });
+        }
+
+        // Find boards by userId
+        let boards = await boardModel.find({ userid: userId });
+
+        // If no boards are found, check the user table
+        if (boards.length === 0) {
+            const user = await userModel.findOne({ _id: userId }).select('email');
+            if (user) {
+                const email = user.email;
+                // Find boards where email is in boardMembers array
+                boards = await boardModel.find({ boardMembers: email });
+            }
+        }
+
+        // Check if any boards were found
+        if (boards.length === 0) {
+            return res.status(404).send({ success: false, message: "No boards found for this user" });
+        }
 
         return res.status(200).send({ success: true, data: boards });
     } catch (error) {
@@ -110,6 +132,7 @@ router.get('/boards', authenticatejwt, async (req: Request, res: Response) => {
         return res.status(500).send({ success: false, message: "Internal server error", error });
     }
 });
+
 
 // Route to edit a board
 router.put('/edit-board/:boardId', authenticatejwt, async (req: Request, res: Response) => {
