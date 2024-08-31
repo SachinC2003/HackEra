@@ -19,6 +19,7 @@ const Sidebar = () => {
       <div className="flex flex-col justify-between menu">
         <div className="flex flex-col sidebar-nav">
           <MenuItem title='Board' path='/dashboard' icon='/boardicon.png' />
+          <MenuItem title='Video Meet' path='/videocall' icon='/video1.png' />
           <MenuItem title='Analytics' path='/analytics' icon='/databaseicon.png' />
           <MenuItem title='Settings' path='/settings' icon='/settingsicon.png' />
         </div>

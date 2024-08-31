@@ -32,7 +32,10 @@ const initializeChat = (req, res) => __awaiter(void 0, void 0, void 0, function*
         if (!board) {
             return res.status(404).json({ message: 'Board not found' });
         }
-        if (!board.boardMembers.includes(sanitizedUserId) && board.userid !== user.id) {
+        console.log(board.boardMembers);
+        console.log(sanitizedUserId);
+        const sanitizedMembers = board.boardMembers.map((em) => sanitizeUserId(em));
+        if (!sanitizedMembers.includes(sanitizedUserId) && board.userid !== user.id) {
             return res.status(403).json({ message: 'User is not a member of this board' });
         }
         let channelId = board.chatChannelId;
@@ -40,6 +43,10 @@ const initializeChat = (req, res) => __awaiter(void 0, void 0, void 0, function*
             const channel = serverClient.channel('messaging', `board-${boardId}`, {
                 name: `Chat for ${board.name}`,
                 members: [...board.boardMembers, sanitizedUserId],
+                permissions: {
+                    read: ['user'],
+                    write: ['user']
+                }
             });
             yield channel.create();
             channelId = channel.id;

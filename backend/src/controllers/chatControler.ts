@@ -26,8 +26,12 @@ export const initializeChat = async (req: Request, res: Response) => {
     if (!board) {
       return res.status(404).json({ message: 'Board not found' });
     }
+    console.log(board.boardMembers)
+    console.log(sanitizedUserId)
 
-    if (!board.boardMembers.includes(sanitizedUserId) && board.userid !== user.id) {
+    const sanitizedMembers = board.boardMembers.map((em)=>sanitizeUserId(em))
+
+    if (!sanitizedMembers.includes(sanitizedUserId) && board.userid !== user.id) {
       return res.status(403).json({ message: 'User is not a member of this board' });
     }
 
@@ -37,7 +41,11 @@ export const initializeChat = async (req: Request, res: Response) => {
     if (!channelId) {
       const channel = serverClient.channel('messaging', `board-${boardId}`, {
         name: `Chat for ${board.name}`,
-        members: [...board.boardMembers,sanitizedUserId],
+        members: [...board.boardMembers, sanitizedUserId],
+        permissions: {
+          read: ['user'],
+          write: ['user']
+        }
       });
 
       await channel.create();
