@@ -34,7 +34,14 @@ const Dashboard: React.FC = () => {
 
   const navigate = useNavigate();
   const { setIsLoading } = useLoader();
-  const { boardId } = useParams<{ boardId: string }>();
+  let { boardId } = useParams<{ boardId: string }>();
+  
+  console.log("boardIfd",boardId)
+  const [cboardId, setCboardId] = useState(boardId || '');
+  
+  useEffect(()=>{
+      setCboardId((prev)=>boardId||'');
+  },[boardId])
 
   const options = [
     { label: 'Today', value: 'today' },
@@ -45,7 +52,7 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     fetchBoards();
     fetchTasks();
-  }, [boardId, filterOption]);
+  }, [cboardId, filterOption]);
   console.log('Dashboard component rendered');
 
   const fetchBoards = async () => {
@@ -64,8 +71,8 @@ const Dashboard: React.FC = () => {
 
       if (response.data.success) {
         setBoards(response.data.data);
-        if (boardId) {
-          const currentBoard = response.data.data.find((board: any) => board._id === boardId);
+        if (cboardId) {
+          const currentBoard = response.data.data.find((board: any) => board._id === cboardId);
           setCurrentBoardName(currentBoard ? currentBoard.name : '');
         } else {
           setCurrentBoardName('All Tasks');
@@ -92,7 +99,7 @@ const Dashboard: React.FC = () => {
         },
         params: {
           filter: filterOption,
-          boardId: boardId || '',
+          boardId: cboardId || '',
         },
       });
 
@@ -173,7 +180,7 @@ const Dashboard: React.FC = () => {
         if (response.data.success) {
           toast.success('Board deleted successfully');
           fetchBoards();
-          if (boardId === editingBoard?._id) {
+          if (cboardId === editingBoard?._id) {
             navigate('/dashboard');
           }
         }
@@ -251,9 +258,8 @@ const Dashboard: React.FC = () => {
         <div className="flex align-center gap-16">
           <div className="relative">
           <select
-            value={boardId || ''}
+            value={cboardId || ''}
             onChange={(e) => {
-              console.log(e.target.value); // Add this line
               if (e.target.value === 'create-new') {
                 console.log('hi')
                 setIsAddBoardModalOpen(true);
@@ -269,7 +275,7 @@ const Dashboard: React.FC = () => {
                 {board.name}
               </option>
             ))}
-            <option value="test1">Default</option>
+            <option value="">Your Tasks</option>
             <option value="create-new">+ Add Board</option>
           </select>
             {
@@ -294,12 +300,12 @@ const Dashboard: React.FC = () => {
           
         </div>
         <div className="flex align-center gap-16">
-          {boardId && (
+          {cboardId && (
             <div className="board-actions">
-              <button onClick={() => handleEditBoard(boards.find(b => b._id === boardId)!) } className='edit-button'>
+              <button onClick={() => handleEditBoard(boards.find(b => b._id === cboardId)!) } className='edit-button'>
                 <FaEdit /> Edit Board
               </button>
-              <button onClick={() => handleDeleteBoard(boardId)} className='delete-button'>
+              <button onClick={() => handleDeleteBoard(cboardId)} className='delete-button'>
                 <FaTrash /> Delete Board
               </button>
             </div>

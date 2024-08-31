@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddTaskModal from "../Modals/AddTaskModal";
 import { useParams } from "react-router-dom";
 
@@ -12,10 +12,17 @@ const TaskListHeader = ({ title, type, onCollapseAll }: TaskListHeaderProps) => 
   const{ boardId} = useParams<{
     boardId:string
   }>()
+  const [cboardId, setCboardId] = useState(boardId);
+
+  useEffect(()=>{
+    console.log("Board id updated to", boardId)
+      setCboardId((prev)=>boardId || '');
+  },[boardId])
+
   const [isAddTaskModalOpen,setIsAddTaskModalOpen]=useState(false)
   return (
     <>
-      <AddTaskModal isOpen={isAddTaskModalOpen} onClose={()=>setIsAddTaskModalOpen(false)} boardId={boardId || ""}/>
+      <AddTaskModal isOpen={isAddTaskModalOpen} onClose={()=>setIsAddTaskModalOpen(false)} boardId={cboardId ||''}/>
       <div className="flex justify-between tasklistheader-container">
         <div>
           <p className="tasklistheader">{title}</p>

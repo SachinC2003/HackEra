@@ -5,7 +5,6 @@ import TaskModal from "./TaskModal";
 import { toast } from 'react-toastify';
 import { useLoader } from '../Providers/LoaderProvider';
 import { UserContext } from '../Providers/UserProvider';
-import { useParams } from 'react-router-dom';
 
 type AddTaskModalProps = {
     isOpen: boolean,

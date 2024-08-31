@@ -11,9 +11,11 @@ const MenuItem = ({icon,title,path,onClick,red}:MenuItemProps) => {
     const navigate = useNavigate()
     const location = useLocation()
     return (
-    <div className={`flex ${location.pathname===path ? 'selected':''} menuitem-container`} onClick={path ? ()=>navigate(path) : onClick}>
+    <div className={`flex ${location.pathname.startsWith(path!) ? 'selected':''} menuitem-container`} onClick={path ? ()=>navigate(path) : onClick}>
         <div className="icon-container">
-          <img src={icon} width={24} height={24}/>
+          {title === 'Chat' && <img src={icon} width={28} height={28}/>}
+          {title !== 'Chat' && <img src={icon} width={24} height={24}/> }
+          
         </div>
         <div>
           <p className={`title ${red?'red':''}`}>{title}</p>
