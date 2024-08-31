@@ -11,3 +11,33 @@ h2{
     gap: 16px;  
     padding: 16px; 
 }
+
+ .analytics-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Adjust the spacing between rows as needed */
+}
+
+.card-chart-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Align items to the start of the container */
+  gap: 1rem; /* Adjust the spacing between card and chart as needed */
+}
+
+.card-container,
+.chart-container {
+  flex: 1; /* Ensure both items take up equal space */
+}
+
+.card-container {
+  max-width: 50%; /* Adjust as needed */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chart-container {
+  max-width: 500px; /* Adjust as needed */
+  height: 350px;
+}
